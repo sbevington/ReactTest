@@ -6,15 +6,45 @@ var STATUS = {
   EMPTY : "Empty"
 };
 
+var ACTION = {
+  DINValid: "DINValid"
+};
+function dispatcher(state, action) {
+  return fetch("/din/").then(response => response.json().then(json=>({json, response}))
+).then(({ json, response }) => {
+    if (!response.ok) {
+      retunr Promise.reject(json)
+    }
+})
+};
+
+var store = Redux.createStore(dispatcher);
+
+function callApi() {
+
+};
+
 var Label = React.createClass({
   getDefaultProps: function(){
     return {
       required: "false",
-      text: ""
+      text: "",
+      id: ""
     };
   },
   render: function() {
-    return (<label className={this.props.required==="true"?"required":""}>{this.props.text}: </label>);
+    return (<label id={this.props.id} className={this.props.required==="true"?"required":""}>{this.props.text}: </label>);
+  }
+});
+
+var DINModel = Backbone.Model.extend({
+  defaults: {
+    //url: '/din'
+    din: "",
+    flag: ""
+  },
+  initialize: function(){
+    console.log("init");
   }
 });
 
@@ -24,12 +54,13 @@ var TextInput = React.createClass({
       type: "text",
       value: "",
       className: "",
+      id: "",
       handleChange: function(){ /* noop */ }
     };
   },
   render: function() {
     return (
-        <input value={this.props.value} className={this.props.className} type={this.props.type} onChange={this.props.handleChange} />
+        <input id={this.props.id} value={this.props.value} className={this.props.className} type={this.props.type} onChange={this.props.handleChange} />
       );
     }
 });
@@ -38,20 +69,20 @@ var FormInputMixin = {
 render: function() {
   return (
       <div>
-        <Label text={this.props.label} required={this.props.required} />
+        <Label id={"lbl_"+this.props.id} text={this.props.label} required={this.state.required} />
         <TextInput {...this.props} className={"Status"+this.state.status} value={this.state.value} handleChange={this.handleChange} />
       </div>
       );
     }
 }
 
-
 var InputStateMixin = {
   getInitialState: function(){
     return {
       isscan : false,
       value : "",
-      status : STATUS.EMPTY
+      status : STATUS.EMPTY,
+      required: this.props.required
     };
   },
   handleChange: function( event ) {
@@ -59,6 +90,7 @@ var InputStateMixin = {
     var len = val.length;
     var scan = this.state.isscan;
     var status = STATUS.EMPTY;
+    var required = this.props.required;
 
     if ( len == 0 ){
       scan = false;
@@ -90,10 +122,15 @@ var InputStateMixin = {
         }
       }
     }
+    if (this.props.required === "true" && status == STATUS.GOOD ) {
+      required = "false";
+    }
+
     this.setState({
       value : val,
       isscan : scan,
-      status : status
+      status : status,
+      required: required
     });
   }
 }
@@ -108,12 +145,18 @@ var DINInput = React.createClass({
       hasflag: false
     };
   },
+  getInitialState: function(){
+    return {
+      model : new DINModel(),
+    };
+  },
   checkFormat: function( val, scan ) {
     var len = val.length;
     var status = STATUS.WARN;
 
     val = val.toUpperCase();
 
+    /* TODO - Expand this to DIN's proper validation */
     if ( ( len > 0 && val.charAt(0) != "W" )
           || len > this.props.maxLength ) {
       status = STATUS.BAD
@@ -134,7 +177,7 @@ var ContainerInput = React.createClass({
       maxLength : 10,
       minLength : 10,
       label: "Container",
-      scanprefix: "=%"
+      scanprefix: "=)"
     };
   }
 });
@@ -162,9 +205,9 @@ var Page = React.createClass({
   },
   render: function() {
     return (<div onChange={this.handleChange}>
-        <DINInput label="DIN 1" hasflag="true" required="true" value={this.state.din1} /><br />
+        <DINInput label="DIN 1" id="din1" hasflag="true" required="true" value={this.state.din1} /><br />
         <DINInput label="DIN 2" value={this.state.din2} /><br />
-        <ContainerInput label="Container" value={this.state.container} /><br />
+        <ContainerInput label="Container" required="true" value={this.state.container} /><br />
         <DINText  label="DIN 1" value={this.state.din1} />
   		</div>);
   }
