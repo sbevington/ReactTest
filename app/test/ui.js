@@ -9,12 +9,12 @@ var STATUS = {
 var Label = React.createClass({
   getDefaultProps: function(){
     return {
-      required: false,
+      required: "false",
       text: ""
     };
   },
   render: function() {
-    return (<label className={this.props.required?"required":""}>{this.props.text}: </label>);
+    return (<label className={this.props.required==="true"?"required":""}>{this.props.text}: </label>);
   }
 });
 
@@ -33,6 +33,18 @@ var TextInput = React.createClass({
       );
     }
 });
+
+var FormInputMixin = {
+render: function() {
+  return (
+      <div>
+        <Label text={this.props.label} required={this.props.required} />
+        <TextInput {...this.props} className={"Status"+this.state.status} value={this.state.value} handleChange={this.handleChange} />
+      </div>
+      );
+    }
+}
+
 
 var InputStateMixin = {
   getInitialState: function(){
@@ -87,13 +99,12 @@ var InputStateMixin = {
 }
 
 var DINInput = React.createClass({
-  mixins: [InputStateMixin],
+  mixins: [InputStateMixin,FormInputMixin],
   getDefaultProps: function(){
     return {
       maxLength : 16,
       label: "DIN",
       scanprefix: "=",
-      required: false,
       hasflag: false
     };
   },
@@ -113,14 +124,18 @@ var DINInput = React.createClass({
     }
 
     return {val: val, status: status};
-  },
-  render: function() {
-    return (
-        <div>
-          <Label text={this.props.label} required={this.props.required} />
-        	<TextInput {...this.props} className={"Status"+this.state.status} value={this.state.value} handleChange={this.handleChange} />
-        </div>
-        );
+  }
+});
+
+var ContainerInput = React.createClass({
+  mixins: [InputStateMixin,FormInputMixin],
+  getDefaultProps: function(){
+    return {
+      maxLength : 10,
+      minLength : 10,
+      label: "Container",
+      scanprefix: "=%"
+    };
   }
 });
 
@@ -142,14 +157,15 @@ var Page = React.createClass({
   getInitialState: function(){
       return { din: "" };
   },
+  handleChange: function(event){
+    this.setState({ din1: event.target.value});
+  },
   render: function() {
-    return (<div>
-        <DINInput label="DIN 1" hasflag="true" required="true" value={this.state.din} /><br />
-        <DINInput label="DIN 2" value={this.state.din} /><br />
-        <DINInput label="DIN 3" value={this.state.din} /><br />
-        <DINInput label="DIN 4" value={this.state.din} /><br />
-        <DINInput label="DIN 5" value={this.state.din} ><br />
-        <DINText  label="DIN 1" value={this.state.din} /></DINInput>
+    return (<div onChange={this.handleChange}>
+        <DINInput label="DIN 1" hasflag="true" required="true" value={this.state.din1} /><br />
+        <DINInput label="DIN 2" value={this.state.din2} /><br />
+        <ContainerInput label="Container" value={this.state.container} /><br />
+        <DINText  label="DIN 1" value={this.state.din1} />
   		</div>);
   }
 });

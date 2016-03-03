@@ -13,6 +13,7 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
+  <?php echo phpversion(); ?>
 <div id="root"></div>
 <script type="text/babel" src="ui.js"></script>
 </body>
