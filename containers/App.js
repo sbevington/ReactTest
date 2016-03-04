@@ -4,7 +4,9 @@ import { browserHistory } from 'react-router'
 import Explore from '../components/Explore'
 import Label from '../components/Label'
 import TextInput from '../components/TextInput'
-import FormInput from '../components/FormInput'
+import DINInput from '../components/DINInput'
+import ValidatedInput from '../components/ValidatedInput'
+import FormLine from '../components/FormLine'
 import { resetErrorMessage } from '../actions'
 
 class App extends Component {
@@ -50,7 +52,15 @@ class App extends Component {
       <Label for="test1" id="test1" required="true">Scott Test</Label>
       <TextInput id="test1"/>
       <br />
-      <FormInput id="test2" required="true" label="Test 2" />
+      <FormLine for="test2" required="true" label="Test 2">
+        <DINInput id="test2" value="" />
+      </FormLine>
+      <FormLine for="test3" required="true" label="Test 3">
+        <ValidatedInput id="test3" value="" />
+      </FormLine>
+      <FormLine for="test4" label="Test 4">
+        <TextInput id="test4" value="" />
+      </FormLine>
       <br />
         {this.renderErrorMessage()}
       </div>

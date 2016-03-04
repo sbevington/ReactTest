@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import TextInput from './TextInput'
 
-export default class DINInput extends TextInput {
+export default class ValidatedInput extends TextInput {
   constructor(props) {
     super(props)
   }
@@ -12,12 +12,12 @@ export default class DINInput extends TextInput {
   ); }
 }
 
-DINInput.propTypes = {
+ValidatedInput.propTypes = {
   required: PropTypes.string,
   id: PropTypes.string,
   children: PropTypes.string.isRequired
 }
 
-DINInput.defaultProps = {
+ValidatedInput.defaultProps = {
   scanprefix: "="
 }
