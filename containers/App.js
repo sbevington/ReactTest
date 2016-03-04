@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import Explore from '../components/Explore'
 import Label from '../components/Label'
+import TextInput from '../components/TextInput'
+import FormInput from '../components/FormInput'
 import { resetErrorMessage } from '../actions'
 
 class App extends Component {
@@ -45,9 +47,11 @@ class App extends Component {
     const { children, inputValue } = this.props
     return (
       <div>
-       <Label text="Scott Test" required="true" />
-       <Label text="Scott Test2" required="true" />
-       <Label text="Scott Test3" />
+      <Label for="test1" id="test1" required="true">Scott Test</Label>
+      <TextInput id="test1"/>
+      <br />
+      <FormInput id="test2" required="true" label="Test 2" />
+      <br />
         {this.renderErrorMessage()}
       </div>
     )
