@@ -9,35 +9,53 @@ export const STATUS = {
   EMPTY: "Empty"
 }
 
-export default class ValidatedInput extends TextInput {
+export default class ValidatedInput extends Component {
   constructor(props) {
     super(props)
-//    this.setState({ status: checkFormat( props.value ) });
+    this.state = {value:"",status:"",required:""};
   }
 
-  componentWillReceiveProps(nextProps) {
-  //  this.setState({ status: checkFormat( nextProps.value ) });
+  isValid(){return this.state.status === STATUS.GOOD;}
+
+  componentWillMount() {
+    this.handleChange = this.handleChange.bind(this);
+    this.checkFormat(this.props.value);
   }
 
-  handleChange() {
-
+  componentWillUnmount() {
+    /* No Op */
   }
+
   checkFormat( value ) {
-      return STATUS.GOOD;
+    var val = value || "";
+    var status = "";
+    var required = this.props.required;
+    var min = this.props.minLength || 0;
+    var max = this.props.maxLength || val.length;
+
+    if (val.length==0) {
+      status = STATUS.EMPTY;
+    } else if (val.length < min) {
+      status = STATUS.WARN;
+    } else if (val.length <= max) {
+      status = STATUS.GOOD;
+    } else {
+      status = STATUS.BAD;
+    }
+    required = this.props.required && status !== STATUS.GOOD;
+
+    this.setState({value: val, status: status, required: required});
+  }
+
+  handleChange( e ) {
+    this.checkFormat( e.target.value );
   }
 
   render() {
     return (
-      <TextInput id={this.props.id} value={this.props.value} {...this.props}/>
+      <TextInput className={"Status"+this.state.status}
+            onChange={this.handleChange}
+            {...this.props}
+            required={this.state.required} />
   ); }
-}
-
-ValidatedInput.propTypes = {
-  required: PropTypes.string,
-  id: PropTypes.string,
-  children: PropTypes.string.isRequired
-}
-
-ValidatedInput.defaultProps = {
-  scanprefix: "="
 }

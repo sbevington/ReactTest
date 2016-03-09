@@ -2,11 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import Explore from '../components/Explore'
-import Label from '../components/Label'
 import TextInput from '../components/TextInput'
 import DINInput from '../components/DINInput'
 import ValidatedInput from '../components/ValidatedInput'
-import FormLine from '../components/FormLine'
 import { resetErrorMessage } from '../actions'
 
 class App extends Component {
@@ -49,25 +47,21 @@ class App extends Component {
     const { children, inputValue } = this.props
     return (
       <div>
-      <Label for="test1" id="test1" required="true">Scott Test</Label>
-      <TextInput id="test1"/>
-      <br />
-      <FormLine for="test2" required="true" label="Test 2">
-        <DINInput id="test2" value="" />
-      </FormLine>
-      <FormLine for="test3" required="true" label="Test 3">
-        <ValidatedInput id="test3" value="" />
-      </FormLine>
-      <FormLine for="test4" label="Test 4">
-        <TextInput id="test4" value="" />
-      </FormLine>
+      <TextInput id="test1" label="Label Sepa" />
+      <DINInput id="test2" label="DIN Test" required={true}/>
+      <ValidatedInput id="test3" minLength="5" label="ValidInput" required={false} />
       <br />
         {this.renderErrorMessage()}
       </div>
     )
   }
 }
-
+/*
+<ValidatedInput id="test4" minLength="5" size="10" label="Test Label">
+  <ValidatedInput id="test6" minLength="5" size="10" />
+  <ValidatedInput id="test7" minLength="5" size="10" />
+</ValidatedInput>
+*/
 App.propTypes = {
   // Injected by React Redux
   errorMessage: PropTypes.string,

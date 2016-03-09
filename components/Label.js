@@ -8,17 +8,16 @@ export default class Label extends Component {
 
   render() {
     return (
-      <label id={this.props.id} htmlFor={this.props.for} className={this.props.required==="true"?"required":""}>{this.props.children}: </label>
+      <label id={"lbl"+this.props.for} htmlFor={this.props.for} className={this.props.required==true?"required":""}>{this.props.children}: </label>
   ); }
 }
 
 Label.propTypes = {
-  required: PropTypes.string,
-  id: PropTypes.string,
-  for: PropTypes.string,
-  children: PropTypes.string.isRequired
+  required: PropTypes.bool,
+  for: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired
 }
 
 Label.defaultProps = {
-  required: "false"
+  required: false
 }
