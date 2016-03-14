@@ -6,7 +6,6 @@ import classNames from 'classnames';
 export default class DINInput extends ValidatedInput {
   constructor(props) {
     super(props)
-    var self = this;
   }
 
 /*  checkFormat( value ) {

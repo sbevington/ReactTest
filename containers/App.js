@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import Explore from '../components/Explore'
 import TextInput from '../components/TextInput'
 import DINInput from '../components/DINInput'
+import DINsPage from '../containers/DINsPage'
 import ValidatedInput from '../components/ValidatedInput'
 import { resetErrorMessage } from '../actions'
 
@@ -50,6 +51,7 @@ class App extends Component {
       <TextInput id="test1" label="Label Sepa" />
       <DINInput id="test2" label="DIN Test" required={true}/>
       <ValidatedInput id="test3" minLength="5" label="ValidInput" required={false} />
+      <DINsPage />
       <br />
         {this.renderErrorMessage()}
       </div>

@@ -1,4 +1,25 @@
-import { CALL_API, Schemas } from '../middleware/api'
+import { CALL_IBBIS, Schemas } from '../middleware/ibbis'
+
+export const DINS_REQUEST = 'DINS_REQUEST'
+export const DINS_SUCCESS = 'DINS_SUCCESS'
+export const DINS_FAILURE = 'DINS_FAILURE'
+
+function fetchDINs() {
+  return {
+    [CALL_IBBIS]: {
+      types: [ DINS_REQUEST, DINS_SUCCESS, DINS_FAILURE ],
+      endpoint: `dins/`
+    }
+  }
+}
+
+export function loadDINs() {
+  return (dispatch, getState) => {
+    const dins = getState().dins
+
+    return dispatch(fetchDINs())
+  }
+}
 
 export const USER_REQUEST = 'USER_REQUEST'
 export const USER_SUCCESS = 'USER_SUCCESS'
