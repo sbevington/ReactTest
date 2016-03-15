@@ -4,20 +4,20 @@ import paginate from './paginate'
 import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
 
-// Updates an entity cache in response to any action with response.entities.
-function dins(state = { dins: {} }, action) {
-  console.log("response")
-  console.dir( {dins: action.response});
-  console.dir( state );
-
-  if ( action.response && state.dins ) return {}};
-  if (action.response) {
-      return merge({}, state, {dins: action.response})
-  }
-  console.log("state")
+function entities(state = { dins: {} }, action) {
+  console.log("entities")
   console.dir(state)
+  console.dir(action.response)
+
+  if (action.response && Array.isArray(action.response.dins)) {
+    console.log("ent merge")
+    console.dir( merge({}, state, action.response) )
+    return merge({}, state, action.response)
+  }
+
   return state
 }
+
 
 // Updates error message to notify about the failed fetches.
 function errorMessage(state = null, action) {
@@ -32,7 +32,7 @@ function errorMessage(state = null, action) {
   return state
 }
 const rootReducer = combineReducers({
-  dins,
+  entities,
   errorMessage,
   routing
 })

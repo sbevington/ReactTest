@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import merge from 'lodash/merge'
 import { loadDINs } from '../actions'
 import DINHtml from '../components/DINHtml'
 import DINList from '../components/DINList'
@@ -7,6 +8,7 @@ import DINList from '../components/DINList'
 function loadData(props) {
   props.loadDINs()
 }
+var x = 0
 
 class DINsPage extends Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class DINsPage extends Component {
 
   renderDIN(din) {
     return (
-      <DINHtml din={din} />
+      <DINHtml din={din.din} />
     )
   }
 
@@ -32,6 +34,7 @@ class DINsPage extends Component {
     const { dins } = this.props
     console.log("DINsPage")
     console.dir( this.props )
+    console.dir( dins )
     return (
       <div>
         <DINList renderItem={this.renderDIN}
@@ -43,10 +46,14 @@ class DINsPage extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const { dins } = state
+  const { entities: { dins } } = state
+  x+=1
+  console.log("map")
   console.dir( state )
-  return null
-  return { dins }
+  console.dir( dins )
+  console.dir( merge({}, ownProps, {dins: dins}) )
+  if ( x > 10 ) return null
+  return merge({}, ownProps, {dins: dins})
 }
 
 export default connect(mapStateToProps, {
