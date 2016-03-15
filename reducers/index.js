@@ -5,10 +5,12 @@ import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
 
 // Updates an entity cache in response to any action with response.entities.
-function entities(state = { dins: {} }, action) {
+function dins(state = { dins: {} }, action) {
   console.log("response")
   console.dir( {dins: action.response});
+  console.dir( state );
 
+  if ( action.response && state.dins ) return {}};
   if (action.response) {
       return merge({}, state, {dins: action.response})
   }
@@ -30,7 +32,7 @@ function errorMessage(state = null, action) {
   return state
 }
 const rootReducer = combineReducers({
-  entities,
+  dins,
   errorMessage,
   routing
 })

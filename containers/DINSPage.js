@@ -30,6 +30,7 @@ class DINsPage extends Component {
 
   render() {
     const { dins } = this.props
+    console.log("DINsPage")
     console.dir( this.props )
     return (
       <div>
@@ -43,7 +44,8 @@ class DINsPage extends Component {
 
 function mapStateToProps(state, ownProps) {
   const { dins } = state
-
+  console.dir( state )
+  return null
   return { dins }
 }
 
