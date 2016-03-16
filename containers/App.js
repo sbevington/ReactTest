@@ -1,10 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import TextInput from '../components/TextInput'
-import DINInput from '../components/DINInput'
 import DINsPage from '../containers/DINsPage'
-import ValidatedInput from '../components/ValidatedInput'
 import { resetErrorMessage } from '../actions'
 import { Link } from 'react-router'
 
@@ -46,10 +43,9 @@ class App extends Component {
     const { children, inputValue } = this.props
     return (
       <div>
+      <Link to="/">Home</Link>&nbsp;
+      <Link to="/inputTest">Input Test</Link>&nbsp;
       <Link to="/dinlist">DIN List</Link>
-      <TextInput id="test1" label="Label Sepa" />
-      <DINInput id="test2" label="DIN Test" required={true}/>
-      <ValidatedInput id="test3" minLength="5" label="ValidInput" required={false} />
       <br />
         {this.renderErrorMessage()}
       <br />
@@ -58,12 +54,6 @@ class App extends Component {
     )
   }
 }
-/*
-<ValidatedInput id="test4" minLength="5" size="10" label="Test Label">
-  <ValidatedInput id="test6" minLength="5" size="10" />
-  <ValidatedInput id="test7" minLength="5" size="10" />
-</ValidatedInput>
-*/
 App.propTypes = {
   // Injected by React Redux
   errorMessage: PropTypes.string,

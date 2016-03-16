@@ -1,12 +1,12 @@
-import { Schema, arrayOf, normalize } from 'normalizr'
+import {  arrayOf, normalize } from 'normalizr'
 import { camelizeKeys } from 'humps'
 import 'isomorphic-fetch'
 
 const API_ROOT = 'http://wflgnvit326.lifesouth.net:3000/'
 
-// Fetches an API response and normalizes the result JSON according to schema.
+// Fetches an API response.
 // This makes every API response have the same shape, regardless of how nested it was.
-export function callIBBIS(endpoint, schema) {
+export function callIBBIS(endpoint) {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
 
   return fetch(fullUrl)
@@ -19,22 +19,12 @@ export function callIBBIS(endpoint, schema) {
 
       const camelizedJson = camelizeKeys(json)
       console.log("normalize")
-      console.dir(schema)
       console.dir(json)
       console.dir(Object.assign({}, {dins: json} ))
       return Object.assign({},
         {dins: json}
       )
     })
-}
-
-const dinSchema = new Schema('dins', {
-  idAttribute: 'din'
-})
-
-export const Schemas = {
-  DIN: dinSchema,
-  DIN_ARRAY: arrayOf(dinSchema),
 }
 
 // Action key that carries API call info interpreted by this Redux middleware.
@@ -49,16 +39,13 @@ export default store => next => action => {
   }
 
   let { endpoint } = callibbis
-  const { schema, types } = callibbis
+  const { types } = callibbis
 
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState())
   }
   if (typeof endpoint !== 'string') {
     throw new Error('Specify a string endpoint URL.')
-  }
-  if (!schema) {
-    throw new Error('Specify one of the exported Schemas.')
   }
   if (!Array.isArray(types) || types.length !== 3) {
     throw new Error('Expected an array of three action types.')
@@ -74,7 +61,7 @@ export default store => next => action => {
   const [ requestType, successType, failureType ] = types
   next(actionWith({ type: requestType }))
 
-  return callIBBIS(endpoint, schema).then(
+  return callIBBIS(endpoint).then(
     response => next(actionWith({
       response,
       type: successType

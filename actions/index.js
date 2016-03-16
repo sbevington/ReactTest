@@ -8,8 +8,7 @@ function fetchDINs() {
   return {
     [CALL_IBBIS]: {
       types: [ DINS_REQUEST, DINS_SUCCESS, DINS_FAILURE ],
-      endpoint: `dins/`,
-      schema: Schemas.DIN
+      endpoint: `dins/`
     }
   }
 }
