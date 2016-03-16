@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import merge from 'lodash/merge'
 import { loadDINs } from '../actions'
 import DINHtml from '../components/DINHtml'
+import PCodeHtml from '../components/PCodeHtml'
 import DINList from '../components/DINList'
 
 function loadData(props) {
@@ -26,7 +27,10 @@ class DINsPage extends Component {
 
   renderDIN(din) {
     return (
-      <DINHtml din={din.din} />
+      <div>
+      <DINHtml din={din.din} dinflag={din.dinflag} />
+      <PCodeHtml pcode={din.pcode} />
+      </div>
     )
   }
 

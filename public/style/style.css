@@ -1,3 +1,7 @@
+body {
+  font-size: 11px;
+  font-family: tahoma,arial;
+}
 .StatusEmpty {
   background-color: pink;
 }
@@ -17,7 +21,27 @@
 .DIN {
   width: 50px;
 }
+.dinhtml {
+  width: 125px;
+  display: inline-block;
+}
+.din {
+  color: red;
+  font-weight: bold;
+}
 
+.pcode {
+  margin: .5em;
+}
+.pcode_code{
+  font-weight: bold;
+}
+
+.pcode_iu{
+  margin-left: .5em;
+  margin-right: .5em;
+  font-weight: bold;
+}
 label {
 	font-size: 11px;
   font-family: tahoma,arial;

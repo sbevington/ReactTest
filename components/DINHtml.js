@@ -1,7 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import ValidatedInput, {STATUS} from './ValidatedInput'
-import TextInput from './TextInput'
-import classNames from 'classnames';
 
 export default class DINHtml extends Component {
   constructor(props) {
@@ -9,12 +6,16 @@ export default class DINHtml extends Component {
   }
 
   render() {
-    const {din} = this.props
+    const {din, dinflag} = this.props
     return (
-      <span>{din}</span>
+      <span className="dinhtml">
+      <span className="din">{din}</span>
+      <span className="dinflag">{dinflag}</span>
+      </span>
   ); }
 }
 
 DINHtml.propTypes = {
-  din: PropTypes.string.isRequired
+  din: PropTypes.string.isRequired,
+  dinflag: PropTypes.string
 }
