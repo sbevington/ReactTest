@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-export default class PCodeHtml extends Component {
+export default class PCode extends Component {
   constructor(props) {
     super(props)
   }
@@ -19,6 +19,6 @@ export default class PCodeHtml extends Component {
   ); }
 }
 
-PCodeHtml.propTypes = {
+PCode.propTypes = {
   pcode: PropTypes.string.isRequired
 }

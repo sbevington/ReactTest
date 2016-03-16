@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import merge from 'lodash/merge'
 import { loadDINs } from '../actions'
-import DINHtml from '../components/DINHtml'
-import PCodeHtml from '../components/PCodeHtml'
+import DIN from '../components/DIN'
+import PCode from '../components/PCode'
 import DINList from '../components/DINList'
 
 function loadData(props) {
@@ -27,9 +27,9 @@ class DINsPage extends Component {
 
   renderDIN(din) {
     return (
-      <div>
-      <DINHtml din={din.din} dinflag={din.dinflag} />
-      <PCodeHtml pcode={din.pcode} />
+      <div key={din.din+din.dinflag}>
+      <DIN din={din.din} dinflag={din.dinflag} />
+      <PCode pcode={din.pcode} />
       </div>
     )
   }

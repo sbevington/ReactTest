@@ -8,7 +8,7 @@ function loadData(props) {
   props.loadDINs()
 }
 
-class DINSPage extends Component {
+class DINPage extends Component {
   constructor(props) {
     super(props)
     this.renderDINs = this.renderDINs.bind(this)
