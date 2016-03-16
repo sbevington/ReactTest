@@ -6,7 +6,7 @@ export default class DINList extends Component {
       isFetching, items, renderItem, loadingLabel
     } = this.props
 
-    const isEmpty = !items || items.length === 0
+    const isEmpty = !items || !Array.isArray( items ) || items.length === 0 
     if (isEmpty && isFetching) {
       return <h2><i>{loadingLabel}</i></h2>
     }

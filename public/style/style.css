@@ -1,7 +1,27 @@
 body {
-  font-size: 11px;
-  font-family: tahoma,arial;
+  font-size: 10pt;
+  color: #4e3e4e;
+  font-family: "tahoma","Trebuchet MS", "Helvetica", "Arial", "Verdana", "sans-serif";
 }
+a {
+  color: #4e3e4e;
+}
+
+
+label {
+	font-size: 10pt;
+  font-family: tahoma,arial;
+  width:100px;
+  display: inline-block;
+}
+
+label.required
+{
+  color: red;
+  font-style: italic;
+}
+
+
 .StatusEmpty {
   background-color: pink;
 }
@@ -18,39 +38,54 @@ body {
   background-color: cyan;
 }
 
-.DIN {
-  width: 50px;
-}
-.dinhtml {
-  width: 125px;
-  display: inline-block;
-}
-.din {
-  color: red;
-  font-weight: bold;
-}
+
 
 .pcode {
   margin: .5em;
 }
-.pcode_code{
+.pcode_ecode{
   font-weight: bold;
 }
 
-.pcode_iu{
-  margin-left: .5em;
-  margin-right: .5em;
-  font-weight: bold;
-}
-label {
-	font-size: 11px;
-  font-family: tahoma,arial;
-  width:100px;
+
+.din {
+  width: 145px;
   display: inline-block;
+  font-size: .9em;
+}
+.din span {
+  padding-left: .2em;
+  padding-right: .2em;
 }
 
-label.required
-{
-  color: red;
-  font-style: italic;
+.din a{
+  text-decoration: none;
+}
+
+.din a:hover{
+  text-decoration: underline;
+  color: normal;
+}
+.din_fin {
+}
+.din_year {
+  font-size: .8em;
+}
+.din_flag {
+  transform:rotate(-90deg);
+  font-size: .9em;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+}
+.din_series {
+  font-weight:bold;
+}
+
+.din_c {
+  font-size: .8em;
+  border:1px solid #999999;
+  width: .9em;
+  text-align:center;
+  display: inline-block;
 }

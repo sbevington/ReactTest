@@ -12,7 +12,7 @@ export default class PCode extends Component {
     const split = pcode.substring(6,8)
     return (
       <span className="pcode">
-      <span className="pcode_code">{code}</span>
+      <span className="pcode_ecode">{code}</span>
       <span className="pcode_iu">{iu}</span>
       <span className="pcode_split">{split}</span>
       </span>

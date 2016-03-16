@@ -9,7 +9,6 @@ import DINList from '../components/DINList'
 function loadData(props) {
   props.loadDINs()
 }
-var x = 0
 
 class DINsPage extends Component {
   constructor(props) {
@@ -36,9 +35,6 @@ class DINsPage extends Component {
 
   render() {
     const { dins } = this.props
-    console.log("DINsPage")
-    console.dir( this.props )
-    console.dir( dins )
     return (
       <div>
         <DINList renderItem={this.renderDIN}
@@ -51,12 +47,6 @@ class DINsPage extends Component {
 
 function mapStateToProps(state, ownProps) {
   const { entities: { dins } } = state
-  x+=1
-  console.log("map")
-  console.dir( state )
-  console.dir( dins )
-  console.dir( merge({}, ownProps, {dins: dins}) )
-  if ( x > 10 ) return null
   return merge({}, ownProps, {dins: dins})
 }
 
