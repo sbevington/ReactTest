@@ -1,0 +1,27 @@
+.StatusEmpty {
+  background-color: pink;
+}
+.StatusWarn {
+  background-color: yellow;
+}
+.StatusBad {
+  background-color: red;
+}
+.StatusGood {
+  background-color: #00cc00;
+}
+.StatusScan {
+  background-color: cyan;
+}
+
+label {
+	font-size: 11px;
+  font-family: tahoma,arial;
+  width:100px;
+}
+
+label.required
+{
+  color: red;
+  font-style: italic;
+}
