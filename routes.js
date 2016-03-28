@@ -4,6 +4,7 @@ import App from './containers/App'
 import InputTestPage from './containers/InputTestPage'
 import DINPage from './containers/DinPage'
 import DINsPage from './containers/DINsPage'
+import SimpleFormPage from './containers/SimpleFormPage'
 
 export default (
   <Route path="/" component={App}>
@@ -13,5 +14,7 @@ export default (
       component={DINPage} />
     <Route path="/dinlist"
       component={DINsPage} />
+    <Route path="/simpleForm"
+      component={SimpleFormPage} />
   </Route>
 )

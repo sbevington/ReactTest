@@ -2,6 +2,7 @@ import * as ActionTypes from '../actions'
 import merge from 'lodash/merge'
 import paginate from './paginate'
 import { routerReducer as routing } from 'react-router-redux'
+import {reducer as formReducer} from 'redux-form'
 import { combineReducers } from 'redux'
 
 function entities(state = { dins: {} }, action) {
@@ -33,6 +34,7 @@ function errorMessage(state = null, action) {
 }
 const rootReducer = combineReducers({
   entities,
+  form: formReducer,
   errorMessage,
   routing
 })

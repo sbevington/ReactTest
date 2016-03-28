@@ -45,7 +45,8 @@ class App extends Component {
       <div>
       <Link to="/">Home</Link>&nbsp;
       <Link to="/inputTest">Input Test</Link>&nbsp;
-      <Link to="/dinlist">DIN List</Link>
+      <Link to="/dinlist">DIN List</Link>&nbsp;
+      <Link to="/simpleForm">Simple Form</Link>&nbsp;
       <br />
         {this.renderErrorMessage()}
       <br />

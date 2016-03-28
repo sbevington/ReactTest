@@ -19,9 +19,6 @@ export function callIBBIS(endpoint) {
       }
 
       const camelizedJson = camelizeKeys(json)
-      console.log("normalize")
-      console.dir(json)
-      console.dir(Object.assign({}, {dins: json} ))
       return Object.assign({},
         {dins: json}
       )
