@@ -16,12 +16,8 @@ function fetchDINs() {
 export function loadDINs() {
   return (dispatch, getState) => {
     const dins = getState().entities.dins
-    console.log("load pre")
-    console.dir(getState())
 
     if (dins && dins.length > 0) {
-      console.log("load")
-      console.dir(dins)
       return null
     }
 
