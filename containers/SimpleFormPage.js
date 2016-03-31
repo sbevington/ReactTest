@@ -1,44 +1,41 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import merge from 'lodash/merge'
-import SimpleForm from '../components/SimpleForm'
+import SimpleForm from './SimpleForm'
 
-import TextInput from '../components/TextInput'
-import DINInput from '../components/DINInput'
-import ValidatedInput from '../components/ValidatedInput'
-import store from '../containers/App'
-/*
 const submit = ( values, dispatch ) => {
+  console.dir( values );
+  console.dir( dispatch );
   return new Promise((resolve, reject) => {
-    
+    setTimeout(() => {
+      if (!['john', 'paul', 'george', 'ringo'].includes(values.firstName)) {
+        reject({firstName: 'Bad First Name', _error: 'Bad Name!'});
+      } else if (!['starr', 'bob'].includes(values.firstName)) {
+        reject({firstName: 'Bad Last Name', _error: 'Bad Name!'});
+      } else {
+        //dispatch(showResults(values));
+        resolve();
+      }
+    }, 1000); // simulate server latency
   })
 };
-*/
+
 class SimpleFormPage extends Component {
   constructor(props) {
     super(props)
-    this.submit = this.submit.bind(this);
   }
 
   render() {
     const { dins, firstName, lastName } = this.props
-    const { submit } = this
+    const sub = new submit()
     return (
       <div>
-      <SimpleForm
-        onSubmit={this.submit}
-        />
-      <div>{lastName}, {firstName}</div>
+      <SimpleForm handleSubmit={submit}/>
       </div>
     )
   }
 }
-/*
-<ValidatedInput id="test4" minLength="5" size="10" label="Test Label">
-  <ValidatedInput id="test6" minLength="5" size="10" />
-  <ValidatedInput id="test7" minLength="5" size="10" />
-</ValidatedInput>
-*/
+export default SimpleFormPage
 
 function mapStateToProps(state, ownProps) {
   return merge({}, ownProps)

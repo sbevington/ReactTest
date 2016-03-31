@@ -1,23 +1,9 @@
 import * as ActionTypes from '../actions'
 import merge from 'lodash/merge'
-import paginate from './paginate'
 import { routerReducer as routing } from 'react-router-redux'
-import {reducer as formReducer} from 'redux-form'
+import {reducer as formReducer} from 'redux-form';
 import { combineReducers } from 'redux'
 
-function entities(state = { dins: {} }, action) {
-  console.log("entities")
-  console.dir(state)
-  console.dir(action.response)
-
-  if (action.response && Array.isArray(action.response.dins)) {
-    console.log("ent merge")
-    console.dir( merge({}, state, action.response) )
-    return merge({}, state, action.response)
-  }
-
-  return state
-}
 
 
 // Updates error message to notify about the failed fetches.
@@ -32,10 +18,12 @@ function errorMessage(state = null, action) {
 
   return state
 }
+
+
+
 const rootReducer = combineReducers({
-  entities,
-  form: formReducer,
   errorMessage,
+  form: formReducer,
   routing
 })
 

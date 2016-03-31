@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import ibbis from '../middleware/ibbis'
 import rootReducer from '../reducers'
 
 export default function configureStore(initialState) {
